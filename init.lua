@@ -20,6 +20,8 @@ vim.opt.smartindent = true 		-- Indentare automata pt cod
 
 vim.opt.rtp:prepend("~/.local/share/nvim/lazy/lazy.nvim")
 
+vim.o.signcolumn = "yes"
+
 lazy = require("lazy") -- lazy package manager ftw
 lazy.setup("plugins") -- Incarca pluginurile mele
 

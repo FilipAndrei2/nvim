@@ -19,7 +19,8 @@ return {
             })
         end,
     },
-  -- Telescope (fuzzy finder)
+
+    -- Telescope (fuzzy finder)
     {
         "nvim-telescope/telescope.nvim",
         dependencies = { "nvim-lua/plenary.nvim",
