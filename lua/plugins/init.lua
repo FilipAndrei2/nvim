@@ -17,7 +17,83 @@ return {
                     lsp_trouble = true,
                 },
             })
-        end,
+        end
+    },
+
+    -- Yoda (color theme) 
+    {
+        "kuri-sun/yoda.nvim",
+
+        config = function()
+            require("yoda").setup({
+                -- Set light or dark variant
+                theme = "dark", -- "dark" or "light"
+
+                -- Style options
+                italic_comments = false,
+                transparent_background = false,
+                bold_keywords = false,
+                underline_match_paren = false,
+
+                -- Override specific colors
+                colors = {}, -- Override palette colors
+
+                -- Override specific highlight groups
+                highlights = {}, -- Override highlight groups
+
+                -- Disable or enable colorscheme extensions
+                extensions = {
+                    telescope = true,
+                    nvim_tree = true,
+                    cmp = true,
+                    gitsigns = true,
+                    snacks = true,
+                    netrw = true,
+                    todo_comments = true,
+                    indent_blankline = true,
+                    dashboard = true,
+                    which_key = true,
+                    misc = true,
+                    mini = true,
+                    noice = true,
+                    trouble = true,
+                },
+            })
+        end
+    },
+
+    -- Code biscuits for u <
+    { 
+        'code-biscuits/nvim-biscuits', dependencies = { 'nvim-treesitter/nvim-treesitter', }, 
+        opts = { -- Config goes here, 
+            default_config = { 
+                max_lenth = 14, 
+                min_distance = 6, 
+                prefix_string = " ▸ ",
+                hl_group = "BiscuitColor",
+                max_file_size = "100kb"
+            }, 
+        }, 
+        
+        config = function(_, opts) 
+            require("nvim-biscuits").setup(opts)
+            vim.api.nvim_set_hl(
+                0, "BiscuitColor",
+                {
+                    --[[
+                    Comment
+                    Identifier
+                    Function
+                    Type
+                    Keyword
+                    LineNr
+                    String
+                    --]]
+                    link = "Comment", 
+                    bold = true,
+                }
+            )
+        end, 
     },
 
     -- Telescope (fuzzy finder)
@@ -94,16 +170,13 @@ return {
         vim.lsp.enable("rust_analyzer")
 
         -- lua_ls config
-vim.lsp.config('lua_ls', {
-  on_init = function(client)
-    if client.workspace_folders then
-      local path = client.workspace_folders[1].name
-      if
-        path ~= vim.fn.stdpath('config')
-        and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc'))
-      then
-        return
-      end
+    vim.lsp.config('lua_ls', {
+        on_init = function(client)
+        if client.workspace_folders then
+        local path = client.workspace_folders[1].name
+        if path ~= vim.fn.stdpath('config') and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc')) then
+            return
+        end
     end
 
     client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
@@ -142,7 +215,7 @@ vim.lsp.config('lua_ls', {
     Lua = {}
   }
 })
-                vim.lsp.enable('lua_ls')
+            vim.lsp.enable('lua_ls')
         end
     },
 
@@ -152,6 +225,18 @@ vim.lsp.config('lua_ls', {
         "windwp/nvim-autopairs",
         config = function()
             require("nvim-autopairs").setup{}
+        end
+    },
+
+    -- nvim-tree file tree
+    {
+        "nvim-tree/nvim-tree.lua",
+        config = function() 
+            require("nvim-tree").setup ({
+                filters = {
+                    dotfiles = true, -- Ascunde/Afiseaza dotfiles
+                }
+            })
         end
     },
 }
