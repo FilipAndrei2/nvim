@@ -120,7 +120,22 @@ return {
 
     -- LSP si autocmplete
     { "neovim/nvim-lspconfig" },
+    
+    -- coq_nvim fast lsp autocompletion
+    {
+        "ms-jpq/coq_nvim",
 
+        build = function()
+            vim.api.nvim_command("COQdeps") -- Instaleaza dependentele coq o singura data, la build
+        end,
+        
+        config = function()
+           vim.api.nvim_command("COQnow --shut-up") -- porneste coq 🐓
+        end
+    },
+
+    --[[
+    -- nvim-cmp completion for nvim-lspconfig
     {
         "hrsh7th/nvim-cmp",
         dependencies = {
@@ -142,6 +157,7 @@ return {
             })
         end,
     },
+    ]]--
 
 
     { "williamboman/mason.nvim" },
@@ -239,4 +255,6 @@ return {
             })
         end
     },
+
+   
 }
