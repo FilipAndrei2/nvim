@@ -20,6 +20,7 @@ vim.opt.shiftwidth = 4       	-- Cate spatii se foloseste pt indentarea automata
 vim.opt.softtabstop = 4 		-- Foloseste aceeasi latime la autoindent
 vim.opt.autoindent = true 		-- Pastreaza indentarea liniei precedente
 vim.opt.smartindent = true 		-- Indentare automata pt cod
+vim.opt.scrolloff = 13          -- Numarul de linii in partea de jos a ecranului
 
 -- Enable 24-bit colour
 vim.opt.termguicolors = true
